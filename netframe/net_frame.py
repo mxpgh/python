@@ -92,6 +92,9 @@ class Serialize(object):
         return strValue
 
 #网络字节流封侦解侦
+'''
+包格式:包头('\x03\x02')+版本(1个字节)+包头长(1个字节unsigned char)+包长(2个字节unsigned short)+包体+效验(2个字节)+包尾('\x05\x04')
+'''
 class NetFrame(object):
     def __init__(self):
         self.data = []
@@ -229,6 +232,9 @@ class NetFrame(object):
 MIN_NET_FRAME_LEN = 10
 #最大包长
 MAX_NET_FRAME_LEN = 1560
+'''
+包格式:'('+包头长(4个字节整数)+包体长(4个字节整数)+包头+包体+')'
+'''
 class PBNetFrame(object):
     def __init__(self):
         self.data = []
