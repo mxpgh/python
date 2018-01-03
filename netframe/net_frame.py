@@ -154,7 +154,7 @@ class NetFrame(object):
         self.pos = 0
         buf = b''.join(self.data)
         if not buf:
-            result = True
+            result = False
             return packData, result
         del self.data[:]
         logging.debug('unpack:len=%d' % len(buf))
@@ -182,7 +182,7 @@ class NetFrame(object):
             if self.pos + 1 > len(buf):
                 break
             headLen = struct.unpack("<B", buf[self.pos:self.pos + 1])[0]
-            if headLen != 6:
+            if headLen != self.headerLength:
                 buf = self.removeByte(buf)
                 continue
             self.pos += 1
